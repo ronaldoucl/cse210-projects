@@ -1,5 +1,11 @@
 //W02 Prove: Developer—Journal
 
+/* Exceeding Requirements
+
+Improve the process of saving and loading to save as a .csv file.
+
+*/
+
 using System;
 
 class Program
@@ -14,7 +20,9 @@ class Program
             Console.WriteLine("2. Display the journal");
             Console.WriteLine("3. Save the journal to a file");
             Console.WriteLine("4. Load the journal from a file");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("5. Save the journal to a CSV file");
+            Console.WriteLine("6. Load the journal from a CSV file");
+            Console.WriteLine("7. Exit");
             Console.Write("What would you like to do: ");
             int choice = int.Parse(Console.ReadLine());
 
@@ -33,6 +41,12 @@ class Program
                     journal.LoadJournalFromFile();
                     break;
                 case 5:
+                    journal.SaveJournalToCsvFile();
+                    break;
+                case 6:
+                    journal.LoadJournalFromCsvFile();
+                    break;
+                case 7:
                     return;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");

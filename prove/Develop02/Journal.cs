@@ -5,21 +5,12 @@ using System.IO;
 public class Journal
 {
     private List<Entry> _entries = new List<Entry>();
-    private static readonly List<string> Prompts = new List<string>
-    {
-        "Who was the most interesting person I interacted with today?",
-        "What was the best part of my day?",
-        "How did I see the hand of the Lord in my life today?",
-        "What was the strongest emotion I felt today?",
-        "If I had one thing I could do over today, what would it be?",
-        "What made me feel grateful today?",
-        "What was the biggest challenge I faced today?"
-    };
+    
 
     public void WriteNewEntry()
     {
-        Random random = new Random();
-        string prompt = Prompts[random.Next(Prompts.Count)];
+        PromptGenerator promptGenerator = new PromptGenerator();
+        string prompt = promptGenerator.getRandomPrompt();
         Console.WriteLine(prompt);
         string response = Console.ReadLine();
         Entry entry = new Entry(prompt, response, DateTime.Now);
@@ -71,5 +62,54 @@ public class Journal
         {
             Console.WriteLine("File not found.");
         }
+    }
+
+    public void SaveJournalToCsvFile()
+    {
+        Console.Write("Enter filename to save the journal (without extension): ");
+        var filename = Console.ReadLine();
+        using (var writer = new StreamWriter($"{filename}.csv"))
+        {
+            writer.WriteLine("Date,Prompt,Response");
+            foreach (var entry in _entries)
+            {
+                writer.WriteLine(entry.ToCsv());
+            }
+        }
+        Console.WriteLine("Journal saved to CSV file.");
+    }
+
+    public void LoadJournalFromCsvFile()
+    {
+        Console.Write("Enter filename to load the journal (without extension): ");
+        var filename = Console.ReadLine();
+        if (File.Exists($"{filename}.csv"))
+        {
+            _entries.Clear();
+            var lines = File.ReadAllLines($"{filename}.csv");
+            for (var i = 1; i < lines.Length; i++)
+            {
+                var fields = lines[i].Split(',');
+                var date = DateTime.Parse(fields[0]);
+                var prompt = UnescapeFromCsv(fields[1]);
+                var response = UnescapeFromCsv(fields[2]);
+                var entry = new Entry(prompt, response, date);
+                _entries.Add(entry);
+            }
+            Console.WriteLine("Journal loaded from CSV file.");
+        }
+        else
+        {
+            Console.WriteLine("File not found.");
+        }
+    }
+
+    private static string UnescapeFromCsv(string field)
+    {
+        if (field.StartsWith("\"") && field.EndsWith("\""))
+        {
+            field = field.Substring(1, field.Length - 2).Replace("\"\"", "\"");
+        }
+        return field;
     }
 }
