@@ -22,7 +22,7 @@ public class EternalGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{_typeOfGoal}: {_shortName} | {_description} | {_setPoints}";
+        return $"{_typeOfGoal} | {_shortName} | {_description} | {_setPoints}";
     }
 
 

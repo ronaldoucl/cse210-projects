@@ -41,7 +41,7 @@ public class CheckListGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{_typeOfGoal}: {_shortName} | {_description} | {_setPoints} | {_bonus} | {_target} | {GetAmountCompleted()} | {IsComplete()}";
+        return $"{_typeOfGoal} | {_shortName} | {_description} | {_setPoints} | {_bonus} | {_target} | {GetAmountCompleted()} | {IsComplete()}";
     }
 
     public void SetAmountCompleted()
@@ -62,6 +62,10 @@ public class CheckListGoal : Goal
     public void AddSaveAmountCompleted(int amount)
     {
         _amountCompleted = amount;
+    }
+
+    public void setIsComplete(bool status) {
+        _isComplete = status;
     }
 
 }

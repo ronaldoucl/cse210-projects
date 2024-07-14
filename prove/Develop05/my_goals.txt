@@ -1,0 +1,4 @@
+150
+Simple Goal | Go to the gym | I need to work in my health, so I will go to the gym | 100 | True
+Eternal Goals | Read the Scriptures | Read the Scriptures before sleep | 50
+Checklist Goals | Drink water | I need to drink water all the day | 50 | 20 | 8 | 1 | False

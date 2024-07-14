@@ -1,0 +1,4 @@
+0
+Simple Goal | esta es mi simple goal | esta es la descripcion de la simple goal | 100 | False
+Eternal Goals | eternal goal name | eternal goal description | 300
+Checklist Goals | checklist | descripcion de la checklist | 500 | 20 | 3 | 0 | False

@@ -27,8 +27,12 @@ public class SimpleGoal : Goal
         _isComplete = true;
     }
 
+    public void setIsComplete(bool status) {
+        _isComplete = status;
+    }
+
     public override string GetStringRepresentation()
     {
-        return $"{_typeOfGoal}: {_shortName} | {_description} | {_setPoints} | {IsComplete()}";
+        return $"{_typeOfGoal} | {_shortName} | {_description} | {_setPoints} | {IsComplete()}";
     }
 }
